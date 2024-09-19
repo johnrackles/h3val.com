@@ -1,5 +1,5 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "h3val"
+name = "h3val-com"
 compatibility_date = "2024-09-09"
 
 pages_build_output_dir = "./build/client"
