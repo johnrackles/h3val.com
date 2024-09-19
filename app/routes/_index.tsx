@@ -1,4 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
+import { GlowingHeadline } from "~/components/glowing-headline";
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,15 +10,12 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="flex flex-col h-screen items-center justify-center bg-background">
-      <div className="text-center max-w-[450px]">
-        <h1 className="font-black text-foreground text-5xl md:text-9xl tracking-tighter">
-          H3VAL
-        </h1>
-        <h2 className="text-foreground text-xl md:text-5xl">[hɛˈvɑːl]</h2>
-        <blockquote className="mt-6 italic text-lg">
-          &ldquo;friend&rdquo; or &ldquo;comrade&rdquo;, signifying someone who
-          is trustworthy, loyal, and an essential part of a community.
+    <div className="flex h-full min-h-svh flex-col items-center justify-center bg-background">
+      <div className="max-w-[450px] text-center">
+        <GlowingHeadline>H3VAL</GlowingHeadline>
+        <h2 className="text-xl text-foreground lg:text-5xl">[hɛˈvɑːl]</h2>
+        <blockquote className="text-md mt-6 italic text-muted-foreground lg:text-lg">
+          &ldquo;friend&rdquo; or &ldquo;comrade&rdquo;
         </blockquote>
       </div>
     </div>

@@ -19,7 +19,11 @@
     "db:studio:preview": "env-cmd DB_ID='b1d27b41-1654-41ba-afc6-b7cdd49c7940' drizzle-kit studio",
     "db:studio:prod": "env-cmd DB_ID='5d5ecdc2-62a5-4c36-8b0b-62634b2f18adx' drizzle-kit studio",
     "preview": "npm run build && wrangler pages dev",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "@fontsource/geist-sans": "^5.1.0",
@@ -45,6 +49,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240909.0",
     "@remix-run/dev": "^2.11.1",
+    "@tailwindcss/typography": "^0.5.15",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^8.6.0",
@@ -59,7 +64,11 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "postcss": "^8.4.38",
+    "prettier": "3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.6",
     "tailwindcss": "^3.4.12",
     "typescript": "^5.1.6",
     "vite": "^5.1.0",

@@ -13,7 +13,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       headers: {
         "Set-Cookie": await commitSession(session), // You must commit the session whenever you read a flash
       },
-    }
+    },
   );
 }
 

@@ -54,7 +54,7 @@ const auth0Strategy = new Auth0Strategy(
       throw new Error("User creation failed");
     }
     throw new Error("Authorization failed");
-  }
+  },
 );
 
 authenticator.use(auth0Strategy);
