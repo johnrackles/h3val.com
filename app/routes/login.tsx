@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs } from "@remix-run/cloudflare";
+import { type LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { Form, json, useLoaderData } from "@remix-run/react";
 import { authenticator } from "~/services/auth.server";
 import { commitSession, getSession } from "~/services/session.server";
