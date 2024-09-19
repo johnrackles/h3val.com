@@ -2,9 +2,9 @@ import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 import { Authenticator } from "remix-auth";
 import { Auth0Strategy } from "remix-auth-auth0";
-import { z } from "zod";
-import { selectUserSchema, users } from "~/drizzle/schema.server";
-import { env } from "~/env";
+import { type z } from "zod";
+import { type selectUserSchema, users } from "~/drizzle/schema.server";
+
 import { sessionStorage } from "./session.server";
 
 // Create an instance of the authenticator, pass a generic with what your
@@ -13,12 +13,14 @@ export const authenticator = new Authenticator<
   z.infer<typeof selectUserSchema>
 >(sessionStorage);
 
+const env = process.env;
+
 const auth0Strategy = new Auth0Strategy(
   {
-    callbackURL: env.AUTH0_CALLBACK_URL,
-    clientID: env.AUTH0_CLIENT_ID,
-    clientSecret: env.AUTH0_SECRET,
-    domain: env.AUTH0_DOMAIN,
+    callbackURL: env.AUTH0_CALLBACK_URL!,
+    clientID: env.AUTH0_CLIENT_ID!,
+    clientSecret: env.AUTH0_SECRET!,
+    domain: env.AUTH0_DOMAIN!,
   },
   async ({ profile, ...rest }) => {
     console.log(rest);
