@@ -35,9 +35,6 @@ export const links = sqliteTable("links", {
     .notNull(),
 });
 
-export const insertLinkSchema = createInsertSchema(links);
-export const selectLinkSchema = createSelectSchema(links);
-
 export const postsRelations = relations(links, ({ one }) => ({
   owner: one(users, {
     fields: [links.userId],
