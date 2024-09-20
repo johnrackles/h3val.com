@@ -21,6 +21,10 @@ export default function ContactPage() {
             booking@h3val.com
           </a>
           <br />
+          Instagram:{" "}
+          <a href="https://instagram.com/h3val.dj" className={linkStyles()}>
+            @h3val.dj
+          </a>
         </P>
 
         <H2>Impressum</H2>
@@ -34,7 +38,7 @@ export default function ContactPage() {
         <P>
           E-Mail:{" "}
           <a href="mailto:hello@h3val.com" className={linkStyles()}>
-            hello@v3val.com
+            hello@h3val.com
           </a>
         </P>
         <P>

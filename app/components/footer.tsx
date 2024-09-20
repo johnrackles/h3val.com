@@ -1,8 +1,9 @@
-import { Form } from "@remix-run/react";
 import { Link } from "./link";
-import { Button } from "./ui/button";
 
-const footerLinks = [{ href: "/contact", name: "Contact" }];
+const footerLinks = [
+  { href: "/about", name: "About" },
+  { href: "/contact", name: "Contact" },
+];
 
 type Props = { authenticated: boolean };
 
@@ -18,7 +19,8 @@ export function Footer({ authenticated }: Props) {
               </Link>
             </li>
           ))}
-          {authenticated ? (
+          {/**
+           * authenticated ? (
             <>
               <li>
                 <Form action="/auth/logout" method="post">
@@ -41,7 +43,8 @@ export function Footer({ authenticated }: Props) {
                 </Button>
               </Form>
             </li>
-          )}
+          )
+           */}
         </ul>
       </nav>
       <div className="text-muted-foreground">
