@@ -27,6 +27,10 @@ const links: { name: string; body?: string; href: string; icon?: ReactNode }[] =
       href: "https://ra.co/events/2003168",
     },
     {
+      name: "TumultCast · 003 · H3VAL",
+      href: "https://soundcloud.com/tumult-berlin/tumultcast-003-h3val",
+    },
+    {
       name: "Instagram",
       href: "https://instagram.com/h3val.dj",
       icon: <Instagram className="mr-2" size={16} />,
