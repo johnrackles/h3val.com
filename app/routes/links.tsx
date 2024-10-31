@@ -23,8 +23,12 @@ export const meta: MetaFunction = () => {
 const links: { name: string; body?: string; href: string; icon?: ReactNode }[] =
   [
     {
-      name: "11.10. PFANDIDOS x TUMULT",
-      href: "https://ra.co/events/2003168",
+      name: "02.11. AMT BLANK - soliparty für cadus e.v",
+      href: "https://ra.co/events/2033928",
+    },
+    {
+      name: "15.11. WIR BEREUEN NIX - 15 Jahre Straßen aus Zucker Party",
+      href: "https://ra.co/events/2029482",
     },
     {
       name: "TumultCast · 003 · H3VAL",
