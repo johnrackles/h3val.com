@@ -23,6 +23,10 @@ export const meta: MetaFunction = () => {
 const links: { name: string; body?: string; href: string; icon?: ReactNode }[] =
   [
     {
+      name: "Opening @ TUMULT 25.07.2025",
+      href: "https://soundcloud.com/h3val/opening-tumult-25072025",
+    },
+    {
       name: "H3VAL b2b Kowsky @ Fusion 2025 | Luftschloss",
       href: "https://soundcloud.com/h3val/h3val-b2b-kowsky-fusion-2025-luftschloss",
     },
