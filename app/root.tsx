@@ -1,23 +1,17 @@
 import "@fontsource/geist-sans/400.css";
 import "@fontsource/geist-sans/900.css";
-import {
-  type LinksFunction,
-  type LoaderFunctionArgs,
-  type MetaFunction,
-} from "@remix-run/cloudflare";
+import { type LinksFunction, type MetaFunction } from "@remix-run/cloudflare";
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
   useLocation,
 } from "@remix-run/react";
 import { Footer } from "./components/footer";
 import { Header } from "./components/header";
 import { cn } from "./lib/utils";
-import { authenticator } from "./services/auth.server";
 import styles from "./tailwind.css?url";
 
 export const links: LinksFunction = () => [
@@ -30,14 +24,7 @@ export const meta: MetaFunction = () => {
   return [{ title: "H3VAL" }, { name: "description", content: "H3VAL Music" }];
 };
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const user = await authenticator.isAuthenticated(request);
-
-  return { authenticated: !!user };
-}
-
 export function Layout({ children }: { children: React.ReactNode }) {
-  const data = useLoaderData<typeof loader>();
   const location = useLocation();
   const isRoot = location.pathname === "/";
 
@@ -58,7 +45,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         >
           {!isRoot ? <Header /> : null}
           <main className="container mx-auto p-4 lg:p-8">{children}</main>
-          <Footer authenticated={data?.authenticated} />
+          <Footer />
         </div>
         <ScrollRestoration />
         <Scripts />
