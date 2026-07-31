@@ -2,21 +2,21 @@ import { createFileRoute } from "@tanstack/react-router";
 import { linkStyles } from "~/components/link";
 import { H1, H2, P } from "~/components/typography";
 
-export const Route = createFileRoute("/contact")({
+export const Route = createFileRoute("/imprint")({
   head: () => ({
     meta: [
-      { title: "H3VAL Music | Contact" },
-      { name: "description", content: "H3VAL Music Contact & Impressum" },
+      { title: "H3VAL Music | Imprint" },
+      { name: "description", content: "H3VAL Music Contact & Imprint" },
     ],
   }),
-  component: ContactPage,
+  component: ImprintPage,
 });
 
-function ContactPage() {
+function ImprintPage() {
   return (
     <div className="mx-auto max-w-(--breakpoint-md) space-y-10">
       <div className="space-y-4 text-center">
-        <H1>Contact</H1>
+        <H1>Imprint</H1>
       </div>
 
       <section>
@@ -27,9 +27,9 @@ function ContactPage() {
             booking@h3val.com
           </a>
           <br />
-          Instagram:{" "}
-          <a className={linkStyles()} href="https://instagram.com/h3val.dj">
-            @h3val.dj
+          Soundcloud:{" "}
+          <a className={linkStyles()} href="https://soundcloud.com/h3val">
+            @h3val
           </a>
         </P>
       </section>
@@ -37,7 +37,7 @@ function ContactPage() {
       <section>
         <H2 as="h2">Impressum</H2>
         <P>
-          Rackles & Reinecke Tumult Events GbR
+          Johannes Rackles
           <br />
           Colbestraße 25
           <br />
@@ -48,10 +48,6 @@ function ContactPage() {
           <a className={linkStyles()} href="mailto:hello@h3val.com">
             hello@h3val.com
           </a>
-        </P>
-        <P>
-          <span className="font-bold">Vertreten durch:</span> Gesellschafter
-          Johannes Rackles und Leonhard Reinecke
         </P>
       </section>
     </div>

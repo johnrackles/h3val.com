@@ -2,7 +2,7 @@ import { Link } from "./link";
 
 const footerLinks = [
   { href: "/about", name: "About" },
-  { href: "/contact", name: "Contact" },
+  { href: "/imprint", name: "Imprint" },
   { href: "/links", name: "Links" },
 ];
 
