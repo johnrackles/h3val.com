@@ -25,6 +25,16 @@
       }
     }
   },
+  "overrides": [
+    {
+      "includes": ["**/*.jsonc"],
+      "json": {
+        "formatter": {
+          "trailingCommas": "all"
+        }
+      }
+    }
+  ],
   "assist": {
     "actions": {
       "source": {
