@@ -5,8 +5,8 @@ import { H1, H2, P } from "~/components/typography";
 export const Route = createFileRoute("/imprint")({
   head: () => ({
     meta: [
-      { title: "H3VAL Music | Imprint" },
-      { name: "description", content: "H3VAL Music Contact & Imprint" },
+      { title: "H3VAL | Imprint" },
+      { name: "description", content: "H3VAL Contact & Imprint" },
     ],
   }),
   component: ImprintPage,

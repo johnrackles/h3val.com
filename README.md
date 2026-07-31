@@ -1,47 +1,36 @@
-# Welcome to Remix + Cloudflare!
+# H3VAL
 
-- 📖 [Remix docs](https://remix.run/docs)
-- 📖 [Remix Cloudflare docs](https://remix.run/guides/vite#cloudflare)
+Marketing site for H3VAL. Built with
+[TanStack Start](https://tanstack.com/start) (React, file-based routing) on
+Vite, deployed to Cloudflare Workers.
+
+## Stack
+
+- **Framework**: TanStack Start + TanStack Router
+- **Build**: Vite 7
+- **Styling**: Tailwind CSS v4
+- **Lint/format**: [Biome](https://biomejs.dev/)
+- **Types**: TypeScript (strict, `noEmit`)
+- **E2E**: Playwright
+- **Deploy**: Cloudflare Workers via `wrangler`
 
 ## Development
 
-Run the dev server:
-
 ```sh
+npm install
 npm run dev
 ```
 
-To run Wrangler:
+## Commands
 
 ```sh
-npm run build
-npm run start
+npm run dev         # vite dev server
+npm run build        # production build
+npm run lint          # biome check
+npm run format        # biome check --write
+npm run typecheck    # tsc (no emit)
+npm run e2e           # playwright tests
+npm run deploy        # build + wrangler deploy
 ```
 
-## Typegen
-
-Generate types for your Cloudflare bindings in `wrangler.toml`:
-
-```sh
-npm run typegen
-```
-
-You will need to rerun typegen whenever you make changes to `wrangler.toml`.
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then, deploy your app to Cloudflare Pages:
-
-```sh
-npm run deploy
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+See `AGENTS.md` for conventions and guidelines.

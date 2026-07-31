@@ -5,8 +5,8 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
   head: () => ({
     meta: [
-      { title: "H3VAL Music | About" },
-      { name: "description", content: "H3VAL Music About Page" },
+      { title: "H3VAL | About" },
+      { name: "description", content: "H3VAL About Page" },
     ],
   }),
 });

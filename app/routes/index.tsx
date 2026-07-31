@@ -3,10 +3,7 @@ import { GlowingHeadline } from "~/components/glowing-headline";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "H3VAL" },
-      { name: "description", content: "H3VAL Music Home" },
-    ],
+    meta: [{ title: "H3VAL" }, { name: "description", content: "H3VAL Home" }],
   }),
   component: Index,
 });
