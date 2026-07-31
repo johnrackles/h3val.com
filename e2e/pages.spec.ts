@@ -19,7 +19,19 @@ test("imprint page loads", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Imprint" })).toBeVisible();
 });
 
-test("about page soundcloud widgets load with no CSP violations", async ({
+test("about page hides soundcloud players behind a consent gate", async ({
+  page,
+}) => {
+  await page.goto("/about");
+
+  const gateButtons = page.getByRole("button", { name: /^Load "/ });
+  await expect(gateButtons).toHaveCount(3);
+  await expect(
+    page.locator("iframe[src*='w.soundcloud.com/player']"),
+  ).toHaveCount(0);
+});
+
+test("clicking one gate loads all soundcloud players with no CSP violations", async ({
   page,
 }) => {
   const cspViolations: string[] = [];
@@ -30,8 +42,14 @@ test("about page soundcloud widgets load with no CSP violations", async ({
   });
 
   await page.goto("/about");
+  await page
+    .getByRole("button", { name: /^Load "/ })
+    .first()
+    .click();
+
   const frames = page.locator("iframe[src*='w.soundcloud.com/player']");
   await expect(frames).toHaveCount(3);
+  await expect(page.getByRole("button", { name: /^Load "/ })).toHaveCount(0);
 
   for (const frame of await frames.all()) {
     const src = await frame.getAttribute("src");
@@ -44,6 +62,12 @@ test("about page soundcloud widgets load with no CSP violations", async ({
   }
 
   expect(cspViolations).toEqual([]);
+
+  // consent is persisted, so a reload should not show the gate again
+  await page.reload();
+  await expect(
+    page.locator("iframe[src*='w.soundcloud.com/player']"),
+  ).toHaveCount(3);
 });
 
 test("links page loads", async ({ page }) => {
