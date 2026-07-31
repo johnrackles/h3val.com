@@ -3,6 +3,7 @@ import { Link } from "./link";
 const footerLinks = [
   { href: "/about", name: "About" },
   { href: "/contact", name: "Contact" },
+  { href: "/links", name: "Links" },
 ];
 
 export function Footer() {
