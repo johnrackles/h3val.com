@@ -1,3 +1,4 @@
+import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 test("home page loads", async ({ page }) => {
@@ -49,3 +50,12 @@ test("links page loads", async ({ page }) => {
   await page.goto("/links");
   await expect(page).toHaveTitle("H3VAL | Links");
 });
+
+for (const path of ["/", "/about", "/imprint", "/links"]) {
+  test(`${path} has no accessibility violations`, async ({ page }) => {
+    await page.goto(path);
+    // iframe embeds (SoundCloud widget) are third-party markup we don't control
+    const results = await new AxeBuilder({ page }).exclude("iframe").analyze();
+    expect(results.violations).toEqual([]);
+  });
+}
