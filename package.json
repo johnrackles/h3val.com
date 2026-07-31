@@ -10,9 +10,10 @@
     "lint": "biome check .",
     "format": "biome check --write .",
     "typecheck": "tsc",
-    "preview": "npm run build && wrangler dev",
+    "preview": "npm run build && wrangler dev --port 8788",
     "prepare": "lefthook install",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "e2e": "playwright test"
   },
   "dependencies": {
     "@fontsource/geist-sans": "^5.1.0",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.5.6",
     "@cloudflare/vite-plugin": "^1.48.0",
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
