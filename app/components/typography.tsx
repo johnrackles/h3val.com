@@ -29,7 +29,7 @@ export function H2({ children, as }: Omit<Props, "className">) {
 
 export function P({ children, className }: Omit<Props, "as">) {
   return (
-    <p className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}>
+    <p className={cn("leading-7 not-first:mt-6", className)}>
       {children}
     </p>
   );

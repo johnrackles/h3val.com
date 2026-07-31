@@ -1,15 +1,18 @@
-import { type MetaFunction } from "@remix-run/react";
+import { createFileRoute } from "@tanstack/react-router";
 import { linkStyles } from "~/components/link";
 import { H1, H2, P } from "~/components/typography";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "H3VAL Music | Contact" },
-    { name: "description", content: "H3VAL Music Contact & Impressum" },
-  ];
-};
+export const Route = createFileRoute("/contact")({
+  head: () => ({
+    meta: [
+      { title: "H3VAL Music | Contact" },
+      { name: "description", content: "H3VAL Music Contact & Impressum" },
+    ],
+  }),
+  component: ContactPage,
+});
 
-export default function ContactPage() {
+function ContactPage() {
   return (
     <div className="container mx-auto">
       <div>

@@ -10,14 +10,7 @@ import globals from "globals";
 
 export default [
   {
-    ignores: [
-      "node_modules",
-      "build",
-      ".cache",
-      ".wrangler",
-      "!**/.server",
-      "!**/.client",
-    ],
+    ignores: ["node_modules", "build", "dist", ".cache", ".wrangler", "**/routeTree.gen.ts"],
   },
   js.configs.recommended,
   {

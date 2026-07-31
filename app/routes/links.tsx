@@ -1,4 +1,4 @@
-import { type MetaFunction } from "@remix-run/cloudflare";
+import { createFileRoute } from "@tanstack/react-router";
 import { Music } from "lucide-react";
 import { type ReactNode } from "react";
 import { Link } from "~/components/link";
@@ -10,15 +10,18 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "H3VAL | Links" },
-    {
-      name: "description",
-      content: "Links to my various pages all over the Internet",
-    },
-  ];
-};
+export const Route = createFileRoute("/links")({
+  head: () => ({
+    meta: [
+      { title: "H3VAL | Links" },
+      {
+        name: "description",
+        content: "Links to my various pages all over the Internet",
+      },
+    ],
+  }),
+  component: LinksPage,
+});
 
 const links: { name: string; body?: string; href: string; icon?: ReactNode }[] =
   [
@@ -56,7 +59,7 @@ const links: { name: string; body?: string; href: string; icon?: ReactNode }[] =
     },
   ];
 
-export default function LinksPage() {
+function LinksPage() {
   return (
     <div className="flex flex-col items-center">
       <ul className="grid w-full max-w-[350px] gap-4">

@@ -1,8 +1,13 @@
+import { createFileRoute } from "@tanstack/react-router";
 import { P } from "~/components/typography";
 
-export default function AboutPage() {
+export const Route = createFileRoute("/about")({
+  component: AboutPage,
+});
+
+function AboutPage() {
   return (
-    <div className="mx-auto max-w-screen-md">
+    <div className="mx-auto max-w-(--breakpoint-md)">
       <P>
         <span className="font-bold">H3VAL</span>, a name rooted in the Kurdish
         word for &ldquo;comrade,&rdquo; is a rising force in Berlin&lsquo;s
