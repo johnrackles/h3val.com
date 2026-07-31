@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SoundcloudEmbed } from "~/components/soundcloud-embed";
 import { H1, H2 } from "~/components/typography";
 import { soundcloudSets } from "~/lib/soundcloud-sets";
 
@@ -29,14 +30,7 @@ function AboutPage() {
             className="overflow-hidden rounded-xl bg-muted/60 p-1"
             key={set.url}
           >
-            <iframe
-              allow="autoplay"
-              className="block rounded-lg"
-              height="166"
-              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(set.url)}&color=%23ff5500&auto_play=false&show_comments=false&visual=true`}
-              title={set.name}
-              width="100%"
-            />
+            <SoundcloudEmbed name={set.name} url={set.url} />
           </div>
         ))}
       </div>
