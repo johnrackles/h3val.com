@@ -31,6 +31,11 @@ npm run deploy        # build + wrangler deploy
 Always run `npm run lint` and `npm run typecheck` after changes. Run
 `npm run e2e` when routes/page content change.
 
+## Git workflow
+
+- `main` is protected — never commit directly to it. Every change goes on
+  a new branch, pushed and opened as a PR.
+
 ## Conventions
 
 - Routes live in `app/routes/*.tsx`, one file per page; `__root.tsx` sets
