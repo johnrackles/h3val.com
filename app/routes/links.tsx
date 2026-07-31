@@ -2,13 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Music } from "lucide-react";
 import type { ReactNode } from "react";
 import { Link } from "~/components/link";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { H1 } from "~/components/typography";
 
 export const Route = createFileRoute("/links")({
   head: () => ({
@@ -61,28 +55,23 @@ const links: { name: string; body?: string; href: string; icon?: ReactNode }[] =
 
 function LinksPage() {
   return (
-    <div className="flex flex-col items-center">
-      <ul className="grid w-full max-w-[350px] gap-4">
-        {links.map((link) => {
-          return (
-            <li key={link.name}>
-              <Link className="no-underline" to={link.href}>
-                <Card className="bg-muted">
-                  <CardHeader>
-                    <CardTitle className="flex flex-row items-center">
-                      {link.icon ? link.icon : null}
-                      {link.name}
-                    </CardTitle>
-                    <CardDescription>
-                      {new URL(link.href).hostname}
-                    </CardDescription>
-                  </CardHeader>
-                  {link.body ? <CardContent>{link.body}</CardContent> : null}
-                </Card>
-              </Link>
-            </li>
-          );
-        })}
+    <div className="mx-auto max-w-(--breakpoint-md) space-y-6">
+      <div className="space-y-4 text-center">
+        <H1>Links</H1>
+      </div>
+
+      <ul className="mx-auto grid w-full max-w-sm gap-3">
+        {links.map((link) => (
+          <li key={link.name}>
+            <Link
+              className="flex min-h-14 items-center justify-center gap-2 rounded-xl border border-muted bg-muted/30 px-4 py-3 text-center text-sm font-medium leading-snug no-underline transition-colors hover:bg-muted/60 sm:text-base"
+              to={link.href}
+            >
+              {link.icon}
+              <span>{link.name}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );

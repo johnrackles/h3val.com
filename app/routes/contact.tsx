@@ -14,10 +14,13 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   return (
-    <div className="container mx-auto">
-      <div>
+    <div className="mx-auto max-w-(--breakpoint-md) space-y-10">
+      <div className="space-y-4 text-center">
         <H1>Contact</H1>
-        <H2>Booking</H2>
+      </div>
+
+      <section>
+        <H2 as="h2">Booking</H2>
         <P>
           E-Mail:{" "}
           <a className={linkStyles()} href="mailto:booking@h3val.com">
@@ -29,8 +32,10 @@ function ContactPage() {
             @h3val.dj
           </a>
         </P>
+      </section>
 
-        <H2>Impressum</H2>
+      <section>
+        <H2 as="h2">Impressum</H2>
         <P>
           Rackles & Reinecke Tumult Events GbR
           <br />
@@ -45,10 +50,10 @@ function ContactPage() {
           </a>
         </P>
         <P>
-          <div className="font-bold">Vertreten durch:</div> Gesellschafter
+          <span className="font-bold">Vertreten durch:</span> Gesellschafter
           Johannes Rackles und Leonhard Reinecke
         </P>
-      </div>
+      </section>
     </div>
   );
 }
