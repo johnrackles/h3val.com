@@ -8,13 +8,13 @@ test("home page loads", async ({ page }) => {
 
 test("about page loads", async ({ page }) => {
   await page.goto("/about");
-  await expect(page).toHaveTitle("H3VAL Music | About");
+  await expect(page).toHaveTitle("H3VAL | About");
   await expect(page.getByRole("heading", { name: "About" })).toBeVisible();
 });
 
 test("imprint page loads", async ({ page }) => {
   await page.goto("/imprint");
-  await expect(page).toHaveTitle("H3VAL Music | Imprint");
+  await expect(page).toHaveTitle("H3VAL | Imprint");
   await expect(page.getByRole("heading", { name: "Imprint" })).toBeVisible();
 });
 

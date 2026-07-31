@@ -18,7 +18,7 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "H3VAL" },
-      { name: "description", content: "H3VAL Music" },
+      { name: "description", content: "H3VAL" },
     ],
     links: [
       { rel: "stylesheet", href: styles },
