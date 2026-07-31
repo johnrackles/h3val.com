@@ -18,6 +18,9 @@ jobs:
 
       - run: npm ci
 
+      # generates app/routeTree.gen.ts (gitignored), required by typecheck
+      - run: npm run build
+
       - run: npm run lint
 
       - run: npm run typecheck
