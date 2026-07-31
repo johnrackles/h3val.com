@@ -1,5 +1,8 @@
-import { Link as RouterLink, type LinkComponentProps } from "@tanstack/react-router";
-import { type ReactNode } from "react";
+import {
+  type LinkComponentProps,
+  Link as RouterLink,
+} from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { cn } from "~/lib/utils";
 
 export const linkStyles = (className?: string) =>
@@ -15,7 +18,7 @@ export function Link({ children, className, to, ...props }: Props) {
 
   if (isExternal) {
     return (
-      <a href={to} className={linkStyles(className)}>
+      <a className={linkStyles(className)} href={to}>
         {children}
       </a>
     );
@@ -23,8 +26,8 @@ export function Link({ children, className, to, ...props }: Props) {
 
   return (
     <RouterLink
-      to={to as LinkComponentProps["to"]}
       className={linkStyles(className)}
+      to={to as LinkComponentProps["to"]}
       {...props}
     >
       {children}

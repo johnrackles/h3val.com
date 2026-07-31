@@ -34,7 +34,7 @@ function RootComponent() {
   const isRoot = location.pathname === "/";
 
   return (
-    <html lang="en" className="dark">
+    <html className="dark" lang="en">
       <head>
         <HeadContent />
       </head>

@@ -12,7 +12,7 @@ export function Footer() {
         <ul className="flex justify-center space-x-4">
           {footerLinks.map((link) => (
             <li key={link.name}>
-              <Link to={link.href} className="no-underline hover:underline">
+              <Link className="no-underline hover:underline" to={link.href}>
                 {link.name}
               </Link>
             </li>

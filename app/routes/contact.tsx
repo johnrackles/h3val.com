@@ -20,12 +20,12 @@ function ContactPage() {
         <H2>Booking</H2>
         <P>
           E-Mail:{" "}
-          <a href="mailto:booking@h3val.com" className={linkStyles()}>
+          <a className={linkStyles()} href="mailto:booking@h3val.com">
             booking@h3val.com
           </a>
           <br />
           Instagram:{" "}
-          <a href="https://instagram.com/h3val.dj" className={linkStyles()}>
+          <a className={linkStyles()} href="https://instagram.com/h3val.dj">
             @h3val.dj
           </a>
         </P>
@@ -40,7 +40,7 @@ function ContactPage() {
         </P>
         <P>
           E-Mail:{" "}
-          <a href="mailto:hello@h3val.com" className={linkStyles()}>
+          <a className={linkStyles()} href="mailto:hello@h3val.com">
             hello@h3val.com
           </a>
         </P>
