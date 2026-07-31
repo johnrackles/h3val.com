@@ -9,7 +9,7 @@ const footerLinks = [
 export function Footer() {
   return (
     <footer className="space-y-4 border-t border-muted p-4 text-center text-sm lg:p-8">
-      <nav className="">
+      <nav>
         <ul className="flex justify-center space-x-4">
           {footerLinks.map((link) => (
             <li key={link.name}>
