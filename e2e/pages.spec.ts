@@ -1,21 +1,21 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
+// <title> metadata is covered by the fast unit test in app/routes/head.test.ts
+// (vitest) — no browser needed for a static string.
+
 test("home page loads", async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveTitle("H3VAL");
   await expect(page.getByText("H3VAL", { exact: false }).first()).toBeVisible();
 });
 
 test("about page loads", async ({ page }) => {
   await page.goto("/about");
-  await expect(page).toHaveTitle("H3VAL | About");
   await expect(page.getByRole("heading", { name: "About" })).toBeVisible();
 });
 
 test("imprint page loads", async ({ page }) => {
   await page.goto("/imprint");
-  await expect(page).toHaveTitle("H3VAL | Imprint");
   await expect(page.getByRole("heading", { name: "Imprint" })).toBeVisible();
 });
 
@@ -70,10 +70,7 @@ test("clicking one gate loads all soundcloud players with no CSP violations", as
   ).toHaveCount(3);
 });
 
-test("links page loads", async ({ page }) => {
-  await page.goto("/links");
-  await expect(page).toHaveTitle("H3VAL | Links");
-});
+// links page navigation + rendering is exercised by the a11y check below.
 
 for (const path of ["/", "/about", "/imprint", "/links"]) {
   test(`${path} has no accessibility violations`, async ({ page }) => {
