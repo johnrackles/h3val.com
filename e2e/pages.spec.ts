@@ -12,10 +12,10 @@ test("about page loads", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "About" })).toBeVisible();
 });
 
-test("contact page loads", async ({ page }) => {
-  await page.goto("/contact");
-  await expect(page).toHaveTitle("H3VAL Music | Contact");
-  await expect(page.getByRole("heading", { name: "Contact" })).toBeVisible();
+test("imprint page loads", async ({ page }) => {
+  await page.goto("/imprint");
+  await expect(page).toHaveTitle("H3VAL Music | Imprint");
+  await expect(page.getByRole("heading", { name: "Imprint" })).toBeVisible();
 });
 
 test("links page loads", async ({ page }) => {
