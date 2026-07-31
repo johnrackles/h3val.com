@@ -11,6 +11,9 @@ export const startInstance = createStart(() => ({
         },
       ],
       options: { isDev: import.meta.env.DEV },
+      additionalHeaders: {
+        "Cross-Origin-Resource-Policy": "same-origin",
+      },
     }),
   ],
 }));
