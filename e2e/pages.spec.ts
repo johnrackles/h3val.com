@@ -18,7 +18,16 @@ test("imprint page loads", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Imprint" })).toBeVisible();
 });
 
-test("about page soundcloud widgets load", async ({ page }) => {
+test("about page soundcloud widgets load with no CSP violations", async ({
+  page,
+}) => {
+  const cspViolations: string[] = [];
+  page.on("console", (msg) => {
+    if (msg.text().toLowerCase().includes("content security policy")) {
+      cspViolations.push(msg.text());
+    }
+  });
+
   await page.goto("/about");
   const frames = page.locator("iframe[src*='w.soundcloud.com/player']");
   await expect(frames).toHaveCount(3);
@@ -32,6 +41,8 @@ test("about page soundcloud widgets load", async ({ page }) => {
     const widget = await frame.contentFrame();
     await expect(widget?.getByRole("button", { name: "Share" })).toBeVisible();
   }
+
+  expect(cspViolations).toEqual([]);
 });
 
 test("links page loads", async ({ page }) => {

@@ -16,6 +16,7 @@
     "e2e": "playwright test"
   },
   "dependencies": {
+    "@enalmada/start-secure": "^1.0.2",
     "@fontsource/geist-sans": "^5.1.0",
     "@tanstack/react-router": "^1.170.18",
     "@tanstack/react-start": "^1.168.33",
@@ -23,8 +24,7 @@
     "lucide-react": "^1.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.6",
