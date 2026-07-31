@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { cn } from "~/lib/utils";
 
 type Props = {
@@ -29,8 +29,6 @@ export function H2({ children, as }: Omit<Props, "className">) {
 
 export function P({ children, className }: Omit<Props, "as">) {
   return (
-    <p className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}>
-      {children}
-    </p>
+    <p className={cn("leading-7 not-first:mt-6", className)}>{children}</p>
   );
 }
