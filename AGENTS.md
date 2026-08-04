@@ -14,6 +14,11 @@ is Tailwind CSS v4.
 - **Lint/format**: Biome (`biome.json`) — single source of truth, no ESLint/Prettier
 - **Types**: TypeScript strict mode, `noEmit` (Vite builds), path alias `~/*` → `app/*`
 - **E2E**: Playwright, tests in `e2e/`, runs against `npm run preview` on port 8788
+- **Unit tests**: Vitest (`npm test`), colocated as `app/routes/-*.test.ts`
+- **Auth**: Better Auth (`app/lib/auth.ts`), GitHub OAuth optional (only wired when `GITHUB_CLIENT_ID`/`SECRET` are set), schema in `app/lib/auth-schema.ts`
+- **Database**: Cloudflare D1 via `drizzle-orm`, migrations in `migrations/` (`drizzle-kit`, config `drizzle.config.ts`)
+- **Env vars**: validated in `app/lib/env.ts` via `@t3-oss/env-core`; secrets are set with `wrangler secret put`, never added to `wrangler.jsonc`
+- **CSRF/CSP**: `@enalmada/start-secure` middleware wired in `app/start.ts`
 - **Git hooks**: lefthook runs `biome check --write` on staged files pre-commit
 
 ## Commands
@@ -25,26 +30,35 @@ npm run lint          # biome check
 npm run format        # biome check --write
 npm run typecheck    # tsc (no emit)
 npm run e2e           # playwright tests (builds + wrangler preview first)
+npm run test          # vitest unit tests
 npm run deploy        # build + wrangler deploy
 ```
 
 Always run `npm run lint` and `npm run typecheck` after changes. Run
-`npm run e2e` when routes/page content change.
+`npm run test` when touching `app/lib/*` or route logic, and `npm run e2e`
+when routes/page content change.
 
 ## Git workflow
 
-- `main` is protected — never commit directly to it. Every change goes on
-  a new branch, pushed and opened as a PR.
+- `main` is protected — never commit directly to it. Pull `main` from
+  remote before branching. Every change goes on a new branch, pushed and
+  opened as a PR.
 
 ## Conventions
 
 - Routes live in `app/routes/*.tsx`, one file per page; `__root.tsx` sets
   `<head>` meta/title per TanStack Start conventions.
+- When adding a new route, check whether it should also be added to
+  `app/routes/sitemap[.]xml.tsx`.
 - Reuse existing `app/components/*` before adding new ones or a new
   dependency.
 - Biome enforces double quotes, organized imports, a11y rules — don't
   hand-format, just run `npm run format`.
 - Node >= 24 required (see `.nvmrc`).
+- DB schema changes go through `drizzle-kit` migrations in `migrations/` —
+  don't hand-edit `auth-schema.ts` without generating/adding a migration.
+- Admin-only routes/server functions must check the session via
+  `auth.api.getSession` (see `app/lib/links.ts`) before mutating data.
 
 ## Don't
 
