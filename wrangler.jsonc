@@ -15,4 +15,11 @@
       "migrations_dir": "migrations",
     },
   ],
+  "vars": {
+    // Must be the real deployed origin, not localhost, or Better Auth
+    // will reject requests with "Invalid origin".
+    "BETTER_AUTH_URL": "REPLACE_WITH_PRODUCTION_URL",
+    // Optional: only needed if GitHub OAuth is enabled.
+    "GITHUB_CLIENT_ID": "",
+  },
 }
