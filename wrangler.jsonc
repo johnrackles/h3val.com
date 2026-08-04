@@ -7,4 +7,12 @@
   "cache": {
     "enabled": true,
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "h3val-auth",
+      "database_id": "4167f0a6-d3ee-4e2b-bdae-961f5b681098",
+      "migrations_dir": "migrations",
+    },
+  ],
 }

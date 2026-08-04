@@ -21,7 +21,9 @@
     "@fontsource/geist-sans": "^5.1.0",
     "@tanstack/react-router": "^1.170.18",
     "@tanstack/react-start": "^1.168.33",
+    "better-auth": "^1.6.25",
     "clsx": "^2.1.1",
+    "drizzle-orm": "^0.45.2",
     "lucide-react": "^1.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -33,9 +35,11 @@
     "@cloudflare/vite-plugin": "^1.48.0",
     "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.1.2",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.7.0",
+    "drizzle-kit": "^0.31.10",
     "lefthook": "^2.1.10",
     "postcss": "^8.4.38",
     "tailwindcss": "^4.3.3",
@@ -43,7 +47,7 @@
     "vite": "^7.3.6",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.1.10",
-    "wrangler": "^4.115.0"
+    "wrangler": "^4.118.0"
   },
   "engines": {
     "node": ">=24.0.0"

@@ -1,8 +1,19 @@
 import { createCspMiddleware } from "@enalmada/start-secure";
-import { createStart } from "@tanstack/react-start";
+import { createMiddleware, createStart } from "@tanstack/react-start";
+import { auth } from "~/lib/auth";
+
+const authMiddleware = createMiddleware({ type: "request" }).server(
+  ({ request, pathname, next }) => {
+    if (pathname.startsWith("/api/auth")) {
+      return auth.handler(request);
+    }
+    return next();
+  },
+);
 
 export const startInstance = createStart(() => ({
   requestMiddleware: [
+    authMiddleware,
     createCspMiddleware({
       rules: [
         {
