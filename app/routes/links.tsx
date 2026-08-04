@@ -1,9 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Music } from "lucide-react";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import { Link } from "~/components/link";
 import { H1 } from "~/components/typography";
 import { getLinks } from "~/lib/links";
+
+// linktree-style page: keep one page short enough to scan at a glance
+const LINKS_PER_PAGE = 8;
 
 export const Route = createFileRoute("/links")({
   loader: async () => ({ links: await getLinks() }),
@@ -44,6 +47,13 @@ function iconFor(href: string): ReactNode {
 
 function LinksPage() {
   const { links } = Route.useLoaderData();
+  const [page, setPage] = useState(0);
+
+  const totalPages = Math.ceil(links.length / LINKS_PER_PAGE);
+  const visibleLinks = links.slice(
+    page * LINKS_PER_PAGE,
+    page * LINKS_PER_PAGE + LINKS_PER_PAGE,
+  );
 
   return (
     <div className="mx-auto max-w-(--breakpoint-md) space-y-6">
@@ -52,7 +62,7 @@ function LinksPage() {
       </div>
 
       <ul className="mx-auto grid w-full max-w-sm gap-3">
-        {links.map((link) => (
+        {visibleLinks.map((link) => (
           <li key={link.id}>
             <Link
               className="flex min-h-14 items-center justify-center gap-2 rounded-xl border border-muted bg-muted/30 px-4 py-3 text-center text-sm font-medium leading-snug no-underline transition-colors hover:bg-muted/60 sm:text-base"
@@ -64,6 +74,30 @@ function LinksPage() {
           </li>
         ))}
       </ul>
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-4 text-sm">
+          <button
+            className="rounded-lg border border-muted px-3 py-1.5 disabled:opacity-40"
+            disabled={page === 0}
+            onClick={() => setPage((p) => p - 1)}
+            type="button"
+          >
+            Previous
+          </button>
+          <span className="text-muted-foreground">
+            Page {page + 1} of {totalPages}
+          </span>
+          <button
+            className="rounded-lg border border-muted px-3 py-1.5 disabled:opacity-40"
+            disabled={page >= totalPages - 1}
+            onClick={() => setPage((p) => p + 1)}
+            type="button"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 }
