@@ -1,5 +1,13 @@
 import { createCspMiddleware } from "@enalmada/start-secure";
-import { createMiddleware, createStart } from "@tanstack/react-start";
+import {
+  createCsrfMiddleware,
+  createMiddleware,
+  createStart,
+} from "@tanstack/react-start";
+
+const csrfMiddleware = createCsrfMiddleware({
+  filter: (ctx) => ctx.handlerType === "serverFn",
+});
 
 const authMiddleware = createMiddleware({ type: "request" }).server(
   async ({ request, pathname, next }) => {
@@ -16,6 +24,7 @@ const authMiddleware = createMiddleware({ type: "request" }).server(
 export const startInstance = createStart(() => ({
   requestMiddleware: [
     authMiddleware,
+    csrfMiddleware,
     createCspMiddleware({
       rules: [
         {
