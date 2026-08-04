@@ -24,3 +24,13 @@ test("privacy page loads", async ({ page }) => {
     page.getByRole("heading", { name: "Privacy Policy" }),
   ).toBeVisible();
 });
+
+test("admin page gates anonymous visitors behind sign-in", async ({ page }) => {
+  await page.goto("/admin");
+  await expect(
+    page.getByText("You need to sign in before you can manage links."),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Sign in with GitHub" }),
+  ).toBeVisible();
+});
