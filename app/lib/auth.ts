@@ -3,15 +3,18 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { drizzle } from "drizzle-orm/d1";
 import * as schema from "./auth-schema";
+import { env } from "./env";
 
 const db = drizzle(cfEnv.DB, { schema });
 
-const githubClientId = process.env.GITHUB_CLIENT_ID;
-const githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
+const {
+  GITHUB_CLIENT_ID: githubClientId,
+  GITHUB_CLIENT_SECRET: githubClientSecret,
+} = env;
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "sqlite", schema }),
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL: env.BETTER_AUTH_URL,
   emailAndPassword: {
     enabled: false,
   },
