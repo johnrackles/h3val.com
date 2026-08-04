@@ -14,7 +14,7 @@ is Tailwind CSS v4.
 - **Lint/format**: Biome (`biome.json`) — single source of truth, no ESLint/Prettier
 - **Types**: TypeScript strict mode, `noEmit` (Vite builds), path alias `~/*` → `app/*`
 - **E2E**: Playwright, tests in `e2e/`, runs against `npm run preview` on port 8788
-- **Unit tests**: Vitest (`npm test`), colocated as `app/routes/-*.test.ts`
+- **Unit tests**: Vitest (`npm test`), colocated as `app/routes/-*.test.ts`, `environment: "node"` (no DOM/jsdom installed)
 - **Auth**: Better Auth (`app/lib/auth.ts`), GitHub OAuth optional (only wired when `GITHUB_CLIENT_ID`/`SECRET` are set), schema in `app/lib/auth-schema.ts`
 - **Database**: Cloudflare D1 via `drizzle-orm`, migrations in `migrations/` (`drizzle-kit`, config `drizzle.config.ts`)
 - **Env vars**: validated in `app/lib/env.ts` via `@t3-oss/env-core`; secrets are set with `wrangler secret put`, never added to `wrangler.jsonc`
@@ -59,6 +59,29 @@ when routes/page content change.
   don't hand-edit `auth-schema.ts` without generating/adding a migration.
 - Admin-only routes/server functions must check the session via
   `auth.api.getSession` (see `app/lib/links.ts`) before mutating data.
+
+## Test placement
+
+Vitest runs with `environment: "node"` (no jsdom/RTL) — it can only
+exercise pure logic, not rendered components.
+
+- **Unit test (vitest)**: route `head()`/loader/server-handler logic, pure
+  helpers in `app/lib/*` — anything callable directly without a browser.
+- **E2E (playwright)**: anything that needs a real DOM/browser — page
+  rendering, user interaction, `localStorage`, iframes/CSP, accessibility
+  (axe). Don't add jsdom/RTL just to dodge Playwright for a handful of
+  rendering assertions.
+- **Security-critical guards** (e.g. the `requireSession` check in
+  `app/lib/links.ts` gating admin mutations): must have a unit test that
+  calls the server fn directly with a mocked/absent session and asserts it
+  throws — see `app/lib/-links.test.ts`. To invoke a `createServerFn`
+  handler directly under vitest's node env, wrap the call in
+  `runWithStartContext` from `@tanstack/start-storage-context` and mock
+  `@tanstack/react-start/server`'s `getRequestHeaders` (there's no real H3
+  request/response cycle outside Playwright). Also add anonymous-state
+  coverage to `e2e/pages.spec.ts` (page renders the sign-in gate) and to
+  the a11y loop — every route needs one entry there, including auth-gated
+  ones.
 
 ## Don't
 
