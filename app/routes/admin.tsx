@@ -2,7 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { H1, H2 } from "~/components/typography";
 import { authClient } from "~/lib/auth-client";
-import { createLink, deleteLink, getLinks, type LinkRecord } from "~/lib/links";
+import {
+  createLink,
+  deleteLink,
+  getLinks,
+  type LinkRecord,
+  setLinkHidden,
+} from "~/lib/links";
 
 export const Route = createFileRoute("/admin")({
   component: AdminPage,
@@ -31,7 +37,7 @@ function AdminPage() {
       try {
         const [sessionResult, linkResult] = await Promise.all([
           authClient.getSession(),
-          getLinks(),
+          getLinks({ data: { includeHidden: true } }),
         ]);
         setSession(sessionResult.data ?? null);
         setLinks(linkResult);
@@ -74,6 +80,23 @@ function AdminPage() {
     } catch (error) {
       setStatus(
         error instanceof Error ? error.message : "Unable to delete link.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  async function handleToggleHidden(id: string, hidden: boolean) {
+    setSubmitting(true);
+    setStatus(null);
+
+    try {
+      const nextLinks = await setLinkHidden({ data: { id, hidden } });
+      setLinks(nextLinks);
+      setStatus(hidden ? "Link hidden." : "Link visible again.");
+    } catch (error) {
+      setStatus(
+        error instanceof Error ? error.message : "Unable to update link.",
       );
     } finally {
       setSubmitting(false);
@@ -169,17 +192,36 @@ function AdminPage() {
                 key={link.id}
               >
                 <div>
-                  <p className="font-medium">{link.name}</p>
+                  <p className="font-medium">
+                    {link.name}
+                    {link.hidden ? (
+                      <span className="ml-2 text-xs font-normal text-muted-foreground">
+                        (hidden)
+                      </span>
+                    ) : null}
+                  </p>
                   <p className="text-sm text-muted-foreground">{link.href}</p>
                 </div>
-                <button
-                  className="rounded-md border border-muted px-3 py-2 text-sm font-medium"
-                  disabled={submitting}
-                  onClick={() => void handleDelete(link.id)}
-                  type="button"
-                >
-                  Delete
-                </button>
+                <div className="flex shrink-0 gap-2">
+                  <button
+                    className="rounded-md border border-muted px-3 py-2 text-sm font-medium"
+                    disabled={submitting}
+                    onClick={() =>
+                      void handleToggleHidden(link.id, !link.hidden)
+                    }
+                    type="button"
+                  >
+                    {link.hidden ? "Show" : "Hide"}
+                  </button>
+                  <button
+                    className="rounded-md border border-muted px-3 py-2 text-sm font-medium"
+                    disabled={submitting}
+                    onClick={() => void handleDelete(link.id)}
+                    type="button"
+                  >
+                    Delete
+                  </button>
+                </div>
               </li>
             ))}
           </ul>

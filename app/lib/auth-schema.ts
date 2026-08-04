@@ -92,8 +92,14 @@ export const link = sqliteTable("link", {
   name: text("name").notNull(),
   href: text("href").notNull(),
   sortOrder: integer("sort_order").default(0).notNull(),
+  hidden: integer("hidden", { mode: "boolean" }).default(false).notNull(),
+  deleted: integer("deleted", { mode: "boolean" }).default(false).notNull(),
   createdAt: integer("created_at", { mode: "timestamp_ms" })
     .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+    .notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+    .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+    .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
 });
 
