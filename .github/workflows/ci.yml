@@ -21,6 +21,9 @@ jobs:
       # generates app/routeTree.gen.ts (gitignored), required by typecheck
       - run: npm run build
 
+      # generates worker-configuration.d.ts (gitignored), required by typecheck
+      - run: npm run cf-typegen
+
       - run: npm run lint
 
       - run: npm run typecheck

@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS link (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  href TEXT NOT NULL,
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  created_at INTEGER NOT NULL
+);

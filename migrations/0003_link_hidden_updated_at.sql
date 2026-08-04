@@ -1,0 +1,4 @@
+ALTER TABLE link ADD COLUMN hidden INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE link ADD COLUMN updated_at INTEGER NOT NULL DEFAULT 0;
+
+UPDATE link SET updated_at = created_at WHERE updated_at = 0;

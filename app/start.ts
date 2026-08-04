@@ -1,8 +1,30 @@
 import { createCspMiddleware } from "@enalmada/start-secure";
-import { createStart } from "@tanstack/react-start";
+import {
+  createCsrfMiddleware,
+  createMiddleware,
+  createStart,
+} from "@tanstack/react-start";
+
+const csrfMiddleware = createCsrfMiddleware({
+  filter: (ctx) => ctx.handlerType === "serverFn",
+});
+
+const authMiddleware = createMiddleware({ type: "request" }).server(
+  async ({ request, pathname, next }) => {
+    if (pathname.startsWith("/api/auth")) {
+      // ponytail: dynamic import keeps "cloudflare:workers" out of the
+      // client-side server-fn-module-lookup scan, which chokes on it
+      const { auth } = await import("~/lib/auth");
+      return auth.handler(request);
+    }
+    return next();
+  },
+);
 
 export const startInstance = createStart(() => ({
   requestMiddleware: [
+    authMiddleware,
+    csrfMiddleware,
     createCspMiddleware({
       rules: [
         {
