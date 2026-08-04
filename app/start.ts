@@ -1,10 +1,12 @@
 import { createCspMiddleware } from "@enalmada/start-secure";
 import { createMiddleware, createStart } from "@tanstack/react-start";
-import { auth } from "~/lib/auth";
 
 const authMiddleware = createMiddleware({ type: "request" }).server(
-  ({ request, pathname, next }) => {
+  async ({ request, pathname, next }) => {
     if (pathname.startsWith("/api/auth")) {
+      // ponytail: dynamic import keeps "cloudflare:workers" out of the
+      // client-side server-fn-module-lookup scan, which chokes on it
+      const { auth } = await import("~/lib/auth");
       return auth.handler(request);
     }
     return next();
