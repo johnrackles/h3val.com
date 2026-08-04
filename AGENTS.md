@@ -79,9 +79,9 @@ exercise pure logic, not rendered components.
   `runWithStartContext` from `@tanstack/start-storage-context` and mock
   `@tanstack/react-start/server`'s `getRequestHeaders` (there's no real H3
   request/response cycle outside Playwright). Also add anonymous-state
-  coverage to `e2e/pages.spec.ts` (page renders the sign-in gate) and to
-  the a11y loop — every route needs one entry there, including auth-gated
-  ones.
+  coverage to `e2e/smoke.spec.ts` (page renders the sign-in gate) and to
+  the a11y loop in `e2e/accessibility.spec.ts` — every route needs one
+  entry there, including auth-gated ones.
 
 ## Don't
 
